@@ -2,195 +2,214 @@
 //
 
 #include <iostream>
-struct List
-{
-	std::string first_name {"correct"};
-	std::string last_name {"uncorrect"};
+
+class Figure {
+protected:
+	int side;
+	std::string NameFigure;
+public:
+	Figure()
+	{
+		this->side = 0;
+		this->NameFigure = "Figure:";
+	}
+	virtual void print_info()
+	{
+		std::cout << NameFigure << std::endl;
+		std::cout << "Correct" << std::endl;
+		std::cout << "Number of sides: " << side << std::endl;
+		std::cout << std::endl;
+	};
+	virtual ~Figure() {}
 };
 
-
-class Triangle
-{
-	int a{ 0 };
-	int b{ 0 };
-	int c{ 0 };
-	int A{ 0 };
-	int B{ 0 };
-	int C{ 0 };
+class Triangle : public Figure {
+private:
+	int sideA;
+	int sideB;
+	int sideC;
+	int cornerA;
+	int cornerB;
+	int cornerC;
+	std::string NameTriangle;
+	std::string tapeTriangle;
 public:
-	List Tring;
-	void setTriangle()
+	Triangle(int a, int b, int c, int A, int B, int C) // : sideA, sideB, sideC, conorA, conorB, conorC{};
 	{
-		std::cout << "Enter size a: ";
-		std::cin >> a;
-		this->a = a;
-		std::cout << "Enter size b: ";
-		std::cin >> b;
-		this->b = b;
-		std::cout << "Enter size c: ";
-		std::cin >> c;
-		this->c = c;
-		std::cout << "Enter corner A: ";
-		std::cin >> A;
-		this->A = A;
-		std::cout << "Enter corner B: ";
-		std::cin >> B;
-		this->B = B;
-		std::cout << "Enter corner C: ";
-		std::cin >> C;
-		this->C = C;
-	}
-	void metodTriangle()
-	{
-		if (C == 90) std::cout << "right-angled triangle:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == b == c) && (A == 60) && (B == 60) && (C == 60)) std::cout << "equilateral triangle:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == c) && (A == C)) std::cout << "isosceles triangle:" << std::endl << Tring.first_name << std::endl;
-		else std::cout << "triangle:" << std::endl << Tring.last_name << std::endl;
-		std::cout << "Sides: " << "a = " << a << " b = " << b << " c = " << c << std::endl;
-		std::cout << "Corners:: " << "A = " << A << " B = " << B << " C = " << C << std::endl;
-	}
-	Triangle()
-	{
+		this->sideA = a;
+		this->sideB = b;
+		this->sideC = c;
+		this->cornerA = A;
+		this->cornerB = B;
+		this->cornerC = C;
 	};
-	Triangle(int a, int b, int c, int A, int B, int C)
+	void setNameTriangle()
 	{
-		this->a = a;
-		this->b = b;
-		this->c = c;
-		this->A = A;
-		this->B = B;
-		this->C = C;
-	};
+		if (cornerC == 90) {
+			NameTriangle = "Right-angled triangle:"; 
+			if (cornerA + cornerB + cornerC == 180) tapeTriangle = "Correct";
+			else tapeTriangle = "Uncorrect";
+		}
+		else if ((sideA == sideB == sideC) && (cornerA == 60) && (cornerB == 60) && (cornerC == 60))
+		{
+			NameTriangle = "Equilateral triangle:";
+			tapeTriangle = "Correct";
+		}
+		else if ((sideA == sideC) && (cornerA == cornerC))
+		{
+			NameTriangle = "Isosceles triangle:";
+			tapeTriangle = "Uncorrect";
+		}
+		else
+		{
+			NameTriangle = "Triangle:";
+			if(cornerA + cornerB + cornerC == 180) tapeTriangle = "Correct";
+			else tapeTriangle = "Uncorrect";
+		}
+	}
+	void print_info() {
+		std::cout << NameTriangle << std::endl;
+		std::cout << tapeTriangle << std::endl;
+		std::cout << "Sides: a =" << sideA << " b = " << sideB << " c = " << sideC << std::endl;
+		std::cout << "Corners: a =" << cornerA << " b = " << cornerB << " c = " << cornerC << std::endl;
+		std::cout << std::endl;
+	}
 };
 
-class Quadrilateral
+class Quadrilateral :public Figure
 {
-	int a{ 0 };
-	int b{ 0 };
-	int c{ 0 };
-	int d{ 0 };
-	int A{ 0 };
-	int B{ 0 };
-	int C{ 0 };
-	int D{ 0 };
+private:
+	int sideA;
+	int sideB;
+	int sideC;
+	int sideD;
+	int cornerA;
+	int cornerB;
+	int cornerC;
+	int cornerD;
+	std::string NameQuadrilateral;
+	std::string typeQuadrilateral;
 public:
-	List Tring;
-	
-	void setQuadrilateral()
-	{
-		std::cout << "Enter size a: ";
-		std::cin >> a;
-		this->a = a;
-		std::cout << "Enter size b: ";
-		std::cin >> b;
-		this->b = b;
-		std::cout << "Enter size c: ";
-		std::cin >> c;
-		this->c = c;
-		std::cout << "Enter size d: ";
-		std::cin >> d;
-		this->d = d;
-		std::cout << "Enter corner A: ";
-		std::cin >> A;
-		this->A = A;
-		std::cout << "Enter corner B: ";
-		std::cin >> B;
-		this->B = B;
-		std::cout << "Enter corner C: ";
-		std::cin >> C;
-		this->C = C;
-		std::cout << "Enter corner D: ";
-		std::cin >> D;
-		this->D = D;
-	}
-	void metodQuadrilateral()
-	{
-		if ((a == b == c == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90)) std::cout << "square:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == c) && (b == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90))  std::cout << "rectangle:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == b == c == d) && (A == C) && (B == D)) std::cout << "rhomb:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == c) && (b == d) && (A == C) && (B == D)) std::cout << "parallelogram:" << std::endl << Tring.first_name << std::endl;
-		else std::cout << "Quadrilateral:" << std::endl << Tring.last_name << std::endl;;
-		std::cout << "Sides: " << "a = " << a << " b = " << b << " c = " << c << " d = " << d << std::endl;
-		std::cout << "Corners:: " << "A = " << A << " B = " << B << " C = " << C << " D = " << D << std::endl;
-	}
-	Quadrilateral()
-	{
-	};
 	Quadrilateral(int a, int b, int c, int d, int A, int B, int C, int D)
 	{
-		this->a = a;
-		this->b = b;
-		this->c = c;
-		this->d = d;
-		this->A = A;
-		this->B = B;
-		this->C = C;
-		this->D = D;
+		this->sideA = a;
+		this->sideB = b;
+		this->sideC = c;
+		this->sideD = d;
+		this->cornerA = A;
+		this->cornerB = B;
+		this->cornerC = C;
+		this->cornerD = D;
 	};
+
+	void setNameQuadrilateral()
+	{
+		if ((cornerA == 90) && (cornerB == 90) && (cornerC == 90) && (cornerD == 90))
+		{
+			if ((sideA == sideB) && (sideA == sideC) && (sideA == sideD))
+			{
+				NameQuadrilateral = "Square:";
+				typeQuadrilateral = "Correct";
+			}
+			else
+			{
+				NameQuadrilateral = "Rectangle:";
+				typeQuadrilateral = "Correct";
+			}
+		}
+		else
+		{
+			if ((cornerA == cornerC) && (cornerB == cornerD))
+			{
+				if ((sideA == sideB) && (sideA == sideC) && (sideA == sideD))
+				{
+					NameQuadrilateral = "Rhomb:";
+					typeQuadrilateral = "Uncorrect";
+				}
+				else
+				{
+					NameQuadrilateral = "Parallelogram:";
+					typeQuadrilateral = "Uncorrect";
+				}
+			}
+			else
+			{
+				NameQuadrilateral = "Quadrilateral:";
+				if (cornerA + cornerB + cornerC + cornerC == 360) typeQuadrilateral = "Correct";
+				else typeQuadrilateral = "Uncorrect";
+				
+			}
+		}
+	}
+
+	void print_info() {
+		std::cout << NameQuadrilateral << std::endl;
+		std::cout << typeQuadrilateral << std::endl;
+		std::cout << "Sides: " << "a = " << sideA << " b = " << sideB << " c = " << sideC << " d = " << sideD << std::endl;
+		std::cout << "Corners:: " << "A = " << cornerA << " B = " << cornerB << " C = " << cornerC << " D = " << cornerD << std::endl;
+		std::cout << std::endl;
+	}
 };
 
-class Figure : public Triangle, Quadrilateral
-{
-	int F = 0;
-	int T = 3;
-	int Q = 4;
-public:
-	List Tring;
-	void print_info()
-	{
-		int fSide;
-		std::cout << "Enter number of sides:" << std::endl;
-		std::cin >> fSide;
+int main() {
 
-
-		if (fSide == F)
-		{
-			std::cout << "Figure: " << std::endl;
-			std::cout << Tring.first_name << std::endl;
-			std::cout << "Number of sides: " << F << std::endl;
-		}
-		else if (fSide == T)
-		{
-			std::cout << "Triangle: " << std::endl;
-			std::cout << "Number of sides: " << T << std::endl;
-			public_method1();
-
-		}
-		else if (fSide == Q)
-		{
-			std::cout << "Quadrilateral: " << std::endl;
-			std::cout << "Number of sides: " << Q << std::endl;
-			public_method2();
-		}
-		else std::cout << "Figure is undefined" << std::endl;
-	}
-	Figure() {};
-
-protected:
-	void public_method1()
-	{
-		setTriangle();
-		metodTriangle();
-	}
-	void public_method2()
-	{
-		setQuadrilateral();
-		metodQuadrilateral();
-	}
-
-};
-
-
-int main(int argc, char** argv)
-{
 	Figure figure;
+	Figure* p;
+	p = &figure;
+	p->print_info();
 
-	Figure* par_figure = &figure;
-	par_figure->print_info();
+	Triangle triangle(10, 20, 30, 50, 60, 70);
+	triangle.setNameTriangle();
+	p = &triangle;
+	p->print_info();
 
+	Triangle triangle1(10, 20, 30, 50, 60, 90);
+	triangle1.setNameTriangle();
+	p = &triangle1;
+	p->print_info();
+
+	Triangle triangle2(10, 20, 30, 50, 40, 90);
+	triangle2.setNameTriangle();
+	p = &triangle2;
+	p->print_info();
+
+	Triangle triangle3(10, 20, 10, 50, 60, 50);
+	triangle3.setNameTriangle();
+	p = &triangle3;
+	p->print_info();
+
+	Triangle triangle4(30, 30, 30, 60, 60, 60);
+	triangle4.setNameTriangle();
+	p = &triangle4;
+	p->print_info();
+	    
+	Quadrilateral quadrilateral1(10, 20, 30, 40, 50, 60, 70, 80);
+	quadrilateral1.setNameQuadrilateral();
+	p = &quadrilateral1;
+	p->print_info();
+
+	Quadrilateral quadrilateral2(10, 20, 10, 20, 90, 90, 90, 90);
+	quadrilateral2.setNameQuadrilateral();
+	p = &quadrilateral2;
+	p->print_info();
+
+	Quadrilateral quadrilateral3(20, 20, 20, 20, 90, 90, 90, 90);
+	quadrilateral3.setNameQuadrilateral();
+	p = &quadrilateral3;
+	p->print_info();
+
+	Quadrilateral quadrilateral4(20, 30, 20, 30, 30, 40, 30, 40);
+	quadrilateral4.setNameQuadrilateral();
+	p = &quadrilateral4;
+	p->print_info();
+
+	Quadrilateral quadrilateral5(30, 30, 30, 30, 30, 40, 30, 40);
+	quadrilateral5.setNameQuadrilateral();
+	p = &quadrilateral5;
+	p->print_info();
 
 	return EXIT_SUCCESS;
-};
+}
 
 
 
