@@ -4,10 +4,9 @@
 #include <iostream>
 struct List
 {
-	std::string first_name {"correct"};
-	std::string last_name {"uncorrect"};
+	std::string nameCorrect {"correct"};
+	std::string nameUncorrect{"uncorrect"};
 };
-
 
 class Triangle
 {
@@ -40,12 +39,12 @@ public:
 		std::cin >> C;
 		this->C = C;
 	}
-	void metodTriangle()
+	void getTriangle()
 	{
-		if (C == 90) std::cout << "right-angled triangle:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == b == c) && (A == 60) && (B == 60) && (C == 60)) std::cout << "equilateral triangle:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == c) && (A == C)) std::cout << "isosceles triangle:" << std::endl << Tring.first_name << std::endl;
-		else std::cout << "triangle:" << std::endl << Tring.last_name << std::endl;
+		if (C == 90) std::cout << "right-angled triangle:" << std::endl << Tring.nameCorrect << std::endl;
+		else if ((a == b == c) && (A == 60) && (B == 60) && (C == 60)) std::cout << "equilateral triangle:" << std::endl << Tring.nameCorrect << std::endl;
+		else if ((a == c) && (A == C)) std::cout << "isosceles triangle:" << std::endl << Tring.nameCorrect << std::endl;
+		else std::cout << "triangle:" << std::endl << Tring.nameUncorrect << std::endl;
 		std::cout << "Sides: " << "a = " << a << " b = " << b << " c = " << c << std::endl;
 		std::cout << "Corners:: " << "A = " << A << " B = " << B << " C = " << C << std::endl;
 	}
@@ -103,13 +102,13 @@ public:
 		std::cin >> D;
 		this->D = D;
 	}
-	void metodQuadrilateral()
+	void getQuadrilateral()
 	{
-		if ((a == b == c == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90)) std::cout << "square:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == c) && (b == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90))  std::cout << "rectangle:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == b == c == d) && (A == C) && (B == D)) std::cout << "rhomb:" << std::endl << Tring.first_name << std::endl;
-		else if ((a == c) && (b == d) && (A == C) && (B == D)) std::cout << "parallelogram:" << std::endl << Tring.first_name << std::endl;
-		else std::cout << "Quadrilateral:" << std::endl << Tring.last_name << std::endl;;
+		if ((a == b == c == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90)) std::cout << "square:" << std::endl << Tring.nameCorrect << std::endl;
+		else if ((a == c) && (b == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90))  std::cout << "rectangle:" << std::endl << Tring.nameCorrect << std::endl;
+		else if ((a == b == c == d) && (A == C) && (B == D)) std::cout << "rhomb:" << std::endl << Tring.nameCorrect << std::endl;
+		else if ((a == c) && (b == d) && (A == C) && (B == D)) std::cout << "parallelogram:" << std::endl << Tring.nameCorrect << std::endl;
+		else std::cout << "Quadrilateral:" << std::endl << Tring.nameUncorrect << std::endl;;
 		std::cout << "Sides: " << "a = " << a << " b = " << b << " c = " << c << " d = " << d << std::endl;
 		std::cout << "Corners:: " << "A = " << A << " B = " << B << " C = " << C << " D = " << D << std::endl;
 	}
@@ -136,7 +135,7 @@ class Figure : public Triangle, Quadrilateral
 	int Q = 4;
 public:
 	List Tring;
-	void print_info()
+	void choosingShape()
 	{
 		int fSide;
 		std::cout << "Enter number of sides:" << std::endl;
@@ -146,36 +145,36 @@ public:
 		if (fSide == F)
 		{
 			std::cout << "Figure: " << std::endl;
-			std::cout << Tring.first_name << std::endl;
+			std::cout << Tring.nameCorrect << std::endl;
 			std::cout << "Number of sides: " << F << std::endl;
 		}
 		else if (fSide == T)
 		{
 			std::cout << "Triangle: " << std::endl;
 			std::cout << "Number of sides: " << T << std::endl;
-			public_method1();
+			choosingTriangle();
 
 		}
 		else if (fSide == Q)
 		{
 			std::cout << "Quadrilateral: " << std::endl;
 			std::cout << "Number of sides: " << Q << std::endl;
-			public_method2();
+			choosingShape();
 		}
 		else std::cout << "Figure is undefined" << std::endl;
 	}
 	Figure() {};
 
 protected:
-	void public_method1()
+	void choosingTriangle()
 	{
 		setTriangle();
-		metodTriangle();
+		getTriangle();
 	}
-	void public_method2()
+	void choosingQuadrilateral()
 	{
 		setQuadrilateral();
-		metodQuadrilateral();
+		getQuadrilateral();
 	}
 
 };
@@ -186,7 +185,7 @@ int main(int argc, char** argv)
 	Figure figure;
 
 	Figure* par_figure = &figure;
-	par_figure->print_info();
+	par_figure->choosingShape();
 
 
 	return EXIT_SUCCESS;
